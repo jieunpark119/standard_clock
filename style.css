@@ -1,0 +1,198 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  overflow: hidden; /* Disable scrolling */
+  touch-action: none; /* Prevent unwanted gestures on mobile */
+}
+
+
+
+body {
+  position: fixed; /* Prevent scrolling on mobile */
+  overflow: hidden; /* Disable any overflow scrolling */
+  user-select: none;  /* Disable text selection */
+}
+
+
+.container {
+  width: 50vh;
+  height: 50vh;
+  perspective: 100em;
+  -webkit-perspective: 100em; /* Safari prefix */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d; /* Safari prefix */
+  transition: transform 0.5s ease;
+
+  &[data-slide="1"] {
+    transform: rotateY(0deg);
+  }
+  &[data-slide="2"] {
+    transform: rotateY(-90deg);
+  }
+  &[data-slide="3"] {
+    transform: rotateY(-180deg);
+  }
+  &[data-slide="4"] {
+    transform: rotateY(-270deg);
+  }
+}
+
+.carousel__slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #F7DEC5;
+  color: #F02331;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 77%;
+  letter-spacing: -3px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  
+  /* Adjust font-size dynamically */
+  font-size: calc(10vmin); /* Use vmin for consistent scaling */
+}
+
+.title {
+  padding: 15px 15px;
+}
+
+.front {
+  transform: translateZ(25vh);
+}
+
+.right {
+  transform: rotateY(90deg) translateX(25vh);
+  -webkit-transform: rotateY(90deg) translateX(25vh); /* Safari prefix */
+  transform-origin: center right;
+  -webkit-transform-origin: center right; /* Safari prefix */
+}
+
+.back {
+  transform: translateZ(-25vh) rotateY(180deg);
+  -webkit-transform: translateZ(-25vh) rotateY(180deg); /* Safari prefix */
+}
+
+.left {
+  transform: rotateY(-90deg) translateX(-25vh);
+  -webkit-transform: rotateY(-90deg) translateX(-25vh); /* Safari prefix */
+  transform-origin: center left;
+  -webkit-transform-origin: center left; /* Safari prefix */
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 4em;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Hide the next and prev buttons */
+.next, .prev {
+  display: none;
+}
+
+/* Clock styling */
+.clock {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hand {
+  width: 50%;
+  left: 0%;
+  background: black;
+  position: absolute;
+  top: 50%;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.hour-hand {
+  width: 35%;
+  height: 10px;
+  background: black;
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform-origin: 100%;
+  transform: translateX(-50%) rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.minute-hand {
+  height: 5px;
+}
+
+.second-hand {
+  height: 2px;
+  background: black;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  html, body {
+    height: 100vh; /* Ensures body stays at 100% of the viewport height */
+    overflow: hidden; /* No scroll on mobile */
+    position: fixed; /* Prevent scrolling on mobile */
+  }
+  .carousel__slide {
+    font-size: calc(15vmin); /* Slightly larger for mobile screens */
+  }
+
+  .title {
+    padding: 15px 15px;
+  }
+
+  .container {
+    width: 80vmin;
+    height: 80vmin;
+  }
+
+  .front {
+    transform: translateZ(40vmin);
+  }
+
+  .right {
+    transform: rotateY(90deg) translateX(40vmin);
+  }
+
+  .back {
+    transform: translateZ(-40vmin) rotateY(180deg);
+  }
+
+  .left {
+    transform: rotateY(-90deg) translateX(-40vmin);
+  }
+}
